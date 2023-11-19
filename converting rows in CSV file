@@ -1,0 +1,11 @@
+# pandas code that change rows in CSV file
+import pandas as pd
+
+data = {'Name': ['Alice', 'Bob', 'Charlie', 'David'], 'Age': [31, 25, 27, 33], 'City': ['New York', 'Chicago', 'Miami', 'Los Angeles']}
+
+df = pd.DataFrame(data)
+
+# Change the row where name is Alice to have age 30 and city as Paris
+df.loc[df['Name'] == 'Alice', ['Age', 'City']] = [30, 'Paris']
+
+print(df)
