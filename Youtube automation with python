@@ -1,0 +1,30 @@
+import moviepy.editor as mp
+import os
+
+# Folder where video clips are stored
+video_folder = 'video_clips' 
+
+# Folder to store generated YouTube Shorts
+shorts_folder = 'youtube_shorts'
+
+# Get list of video files
+video_files = os.listdir(video_folder)
+
+for video in video_files:
+  # Load the video clip  
+  clip = mp.VideoFileClip(os.path.join(video_folder, video))  
+
+  # Truncate the clip duration to 15 seconds
+  short_clip = clip.subclip(0,15)
+
+  # Add outro image & music
+  outro = (mp.ImageClip("outro_image.jpg")
+           .set_duration(2)
+           .set_audio(mp.AudioFileClip("outro_music.mp3")))
+  final_clip = mp.concatenate_videoclips([short_clip, outro])
+
+  # Render & save Short
+  final_path = os.path.join(shorts_folder, video+'.mp4')
+  final_clip.write_videofile(final_path)
+
+print('YouTube Shorts created!')
