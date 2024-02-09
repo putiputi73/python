@@ -1,0 +1,18 @@
+#Toaday was kinda bored and decided that I calculate IRR for my client instead of doing it manually.
+Given:
+
+Initial premium (PV) = -$1,260,000
+Annual payment (PMT) = $221,418
+Duration (n) = 10 years
+ The code generated is;
+from scipy.optimize import fsolve
+
+# Define the function whose root is the IRR
+def npv_irr(rate):
+    return -1260000 + sum([221418 / (1 + rate) ** t for t in range(1, 11)])
+
+# Use fsolve to find the root of the function, which is the IRR
+irr_solution = fsolve(npv_irr, 0.05)
+
+# Print the Internal Rate of Return (IRR)
+print("Internal Rate of Return (IRR): {:.2%}".format(irr_solution[0]))
